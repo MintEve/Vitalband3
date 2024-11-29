@@ -37,6 +37,14 @@
       </section>
       <br>
       <br>
+
+
+      <div>
+    <div id="map1"></div>
+  </div>
+
+
+
     </div>
   </template>
   
@@ -44,9 +52,46 @@
   export default {
     name: 'CompanyView',
   };
+  name: "MapaConMarcador",
+  mounted() {
+    this.initMaps();
+  },
+  methods: {
+    async initMaps() {
+      // Ubicación en México (por ejemplo, Ciudad de México)
+      const position = { lat: 20.48329880302114, lng: -103.53314571368759 }; 
+
+      // Solicitar las bibliotecas necesarias de Google Maps
+      const { Map } = await google.maps.importLibrary("maps");
+      const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+      // Crear el mapa con la configuración especificada
+      const map1 = new Map(document.getElementById("map1"), {
+        zoom: 10,
+        center: position,
+        mapId: "DEMO_MAP_ID",  // Usa tu propio mapId o elimina esta línea
+      });
+
+      // Crear un solo marcador en la ubicación de México
+      new AdvancedMarkerElement({
+        map: map1,
+        position: position,
+        title: "Marcador en México",
+      });
+    },
+  },
+};
   </script>
   
   <style scoped>
+#map1 {
+  height: 500px;
+  width: 500px;
+  margin: auto;
+}
+
+
+
   /* Contenedor general */
   .encabezado {
     text-align: center; /* Centra todo el contenido dentro del encabezado */
