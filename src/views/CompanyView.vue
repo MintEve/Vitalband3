@@ -50,8 +50,6 @@
   
   <script>
   export default {
-    name: 'CompanyView',
-  };
   name: "MapaConMarcador",
   mounted() {
     this.initMaps();
